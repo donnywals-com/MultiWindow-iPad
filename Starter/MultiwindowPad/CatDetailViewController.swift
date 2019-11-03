@@ -89,16 +89,6 @@ class CatDetailViewController: UIViewController {
   }
 
   @objc func close() {
-    if let session = self.view.window?.windowScene?.session {
-      let options = UIWindowSceneDestructionRequestOptions()
-      options.windowDismissalAnimation = .commit
-      UIApplication.shared.requestSceneSessionDestruction(session, options: options, errorHandler: nil)
-    }
-
-    for session in UIApplication.shared.openSessions {
-      if session.scene?.userActivity?.activityType == "some.activity.type" {
-        UIApplication.shared.requestSceneSessionRefresh(session)
-      }
-    }
+    
   }
 }

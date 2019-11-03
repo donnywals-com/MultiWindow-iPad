@@ -15,11 +15,7 @@ class CatSceneDelegate: UIResponder, UISceneDelegate {
     let detail: CatDetailViewController
     if let activity = connectionOptions.userActivities.first ?? session.stateRestorationActivity,
       let identifier = activity.targetContentIdentifier {
-
       detail = CatDetailViewController(catName: identifier)
-      scene.activationConditions.canActivateForTargetContentIdentifierPredicate = NSPredicate(format: "self == %@", identifier)
-      scene.activationConditions.prefersToActivateForTargetContentIdentifierPredicate = NSPredicate(format: "self == %@", identifier)
-      scene.userActivity = activity
     } else {
       detail = CatDetailViewController(catName: "default")
     }
