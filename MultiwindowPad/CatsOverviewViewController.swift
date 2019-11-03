@@ -29,6 +29,8 @@ class CatsOverviewViewController: UIViewController {
       stackView.addArrangedSubview(image)
 
       image.translatesAutoresizingMaskIntoConstraints = false
+      image.layer.cornerRadius = 6
+      image.clipsToBounds = true
       NSLayoutConstraint.activate([
         image.widthAnchor.constraint(equalToConstant: 200),
         image.heightAnchor.constraint(equalToConstant: 200)])

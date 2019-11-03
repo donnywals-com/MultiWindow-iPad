@@ -38,11 +38,10 @@ class CatDetailViewController: UIViewController {
 
     let wideImage = subImage(width: 424, height: 238, suffix: 1)
     stackView.addArrangedSubview(wideImage)
-    stackView.setCustomSpacing(0, after: wideImage)
     
     let subStackView = UIStackView()
     subStackView.axis = .horizontal
-    subStackView.spacing = 0
+    subStackView.spacing = 8
     stackView.addArrangedSubview(subStackView)
     
     let leftImage = subImage(width: 212, height: 282, suffix: 2)
@@ -64,6 +63,9 @@ class CatDetailViewController: UIViewController {
       image.heightAnchor.constraint(equalToConstant: 150)])
     image.image = UIImage(named: catName)
     
+    image.layer.cornerRadius = 6
+    image.clipsToBounds = true
+    
     image.isUserInteractionEnabled = true
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
     image.addGestureRecognizer(tapGesture)
@@ -74,6 +76,10 @@ class CatDetailViewController: UIViewController {
   func subImage(width: CGFloat, height: CGFloat, suffix: Int) -> UIImageView {
     let image = UIImageView()
     image.translatesAutoresizingMaskIntoConstraints = false
+    
+    image.layer.cornerRadius = 6
+    image.clipsToBounds = true
+    
     NSLayoutConstraint.activate([
       image.widthAnchor.constraint(equalToConstant: width),
       image.heightAnchor.constraint(equalToConstant: height)])
