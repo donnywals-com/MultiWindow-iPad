@@ -26,29 +26,60 @@ class CatDetailViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.spacing = 8
+    stackView.alignment = .center
     view.addSubview(stackView)
-
-    let image = UIImageView()
-    image.isUserInteractionEnabled = true
-    stackView.addArrangedSubview(image)
-
-    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
-    image.addGestureRecognizer(tapGesture)
-
-    image.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      image.widthAnchor.constraint(equalToConstant: 100),
-      image.heightAnchor.constraint(equalToConstant: 100)])
-    image.backgroundColor = .blue
-
+    
+    let topImage = mainImage()
+    stackView.addArrangedSubview(topImage)
+    
     let label = UILabel()
     label.text = catName
     stackView.addArrangedSubview(label)
+
+    let wideImage = subImage(width: 424, height: 238, suffix: 1)
+    stackView.addArrangedSubview(wideImage)
+    stackView.setCustomSpacing(0, after: wideImage)
+    
+    let subStackView = UIStackView()
+    subStackView.axis = .horizontal
+    subStackView.spacing = 0
+    stackView.addArrangedSubview(subStackView)
+    
+    let leftImage = subImage(width: 212, height: 282, suffix: 2)
+    let rightImage = subImage(width: 212, height: 282, suffix: 3)
+    subStackView.addArrangedSubview(leftImage)
+    subStackView.addArrangedSubview(rightImage)
 
     stackView.translatesAutoresizingMaskIntoConstraints = false
     NSLayoutConstraint.activate([
       stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+  }
+  
+  func mainImage() -> UIImageView {
+    let image = UIImageView()
+    image.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      image.widthAnchor.constraint(equalToConstant: 150),
+      image.heightAnchor.constraint(equalToConstant: 150)])
+    image.image = UIImage(named: catName)
+    
+    image.isUserInteractionEnabled = true
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(close))
+    image.addGestureRecognizer(tapGesture)
+    
+    return image
+  }
+  
+  func subImage(width: CGFloat, height: CGFloat, suffix: Int) -> UIImageView {
+    let image = UIImageView()
+    image.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      image.widthAnchor.constraint(equalToConstant: width),
+      image.heightAnchor.constraint(equalToConstant: height)])
+    image.image = UIImage(named: catName+"_\(suffix)")
+    
+    return image
   }
 
   @objc func close() {

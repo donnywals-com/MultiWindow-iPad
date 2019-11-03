@@ -13,7 +13,7 @@ class CatButton: UIView {
 }
 
 class CatsOverviewViewController: UIViewController {
-  let cats = ["cat_1", "cat_2"]
+  let cats = ["Misty", "Nala"]
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -22,7 +22,7 @@ class CatsOverviewViewController: UIViewController {
     stackView.spacing = 8
     view.addSubview(stackView)
 
-    for (index, _) in cats.enumerated() {
+    for (index, cat) in cats.enumerated() {
       let image = UIImageView()
       image.tag = index
       image.isUserInteractionEnabled = true
@@ -30,9 +30,11 @@ class CatsOverviewViewController: UIViewController {
 
       image.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
-        image.widthAnchor.constraint(equalToConstant: 100),
-        image.heightAnchor.constraint(equalToConstant: 100)])
+        image.widthAnchor.constraint(equalToConstant: 200),
+        image.heightAnchor.constraint(equalToConstant: 200)])
       image.backgroundColor = .red
+      
+      image.image = UIImage(named: cat)
 
       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapCat))
       image.addGestureRecognizer(tapGesture)
